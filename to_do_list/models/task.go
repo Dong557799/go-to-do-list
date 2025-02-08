@@ -9,6 +9,7 @@ type Task struct {
 	DueDate   string `json:"dueDate"`
 	Completed bool   `json:"completed"`
 }
-
+//Tasks定义
 var Tasks = make(map[int]Task)
+//用于生成新任务的唯一 ID
 var TaskID = 1
