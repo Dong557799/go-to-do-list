@@ -14,6 +14,7 @@ func Register(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	//用户名是否重复
 	if _, exists := models.Users[user.Username]; exists {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Username already exists"})
 		return
@@ -29,6 +30,7 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	//用户名是否存在以及密码是否匹配
 	if storedUser, exists := models.Users[user.Username]; exists && storedUser.Password == user.Password {
 		c.JSON(http.StatusOK, gin.H{"message": "Login successful"})
 	} else {
