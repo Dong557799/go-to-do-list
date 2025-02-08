@@ -11,6 +11,7 @@ import (
 // CreateList 创建清单处理函数
 func CreateList(c *gin.Context) {
 	var list models.List
+	//使用 c.ShouldBindJSON 方法将请求体中的 JSON 数据解析到 user 变量并提醒错误
 	if err := c.ShouldBindJSON(&list); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
