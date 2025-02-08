@@ -10,6 +10,7 @@ import (
 
 // CreateTask 创建任务处理函数
 func CreateTask(c *gin.Context) {
+	//从请求的 URL 参数中获取名为 listID 的参数
 	listIDStr := c.Param("listID")
 	listID, err := strconv.Atoi(listIDStr)
 	if err != nil {
@@ -20,6 +21,8 @@ func CreateTask(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "List not found"})
 		return
 	}
+
+	//存储从请求体中解析出来的任务数据
 	var task models.Task
 	if err := c.ShouldBindJSON(&task); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -27,9 +30,12 @@ func CreateTask(c *gin.Context) {
 	}
 	task.ID = models.TaskID
 	task.ListID = listID
+
+	//默认设置优先级为p2
 	if task.Priority == "" {
 		task.Priority = "p2"
 	}
+	
 	models.Tasks[models.TaskID] = task
 	models.TaskID++
 	c.JSON(http.StatusOK, task)
