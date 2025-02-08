@@ -7,5 +7,5 @@ type User struct {
 	Nickname string `json:"nickname"`
 	Avatar   string `json:"avatar"`
 }
-
+//Users定义
 var Users = make(map[string]User)
