@@ -5,12 +5,15 @@ import (
 	"to_do_list/handlers"
 )
 
+//定义SetupRouter 的函数，用于设置路由
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
+	//注册 handlers.Register handlers.Login 处理函数
 	r.POST("/register", handlers.Register)
 	r.POST("/login", handlers.Login)
 
+	//处理与清单相关的路由
 	listGroup := r.Group("/lists")
 	{
 		listGroup.POST("/", handlers.CreateList)
@@ -18,6 +21,7 @@ func SetupRouter() *gin.Engine {
 		listGroup.PUT("/:listID", handlers.UpdateList)
 		listGroup.DELETE("/:listID", handlers.DeleteList)
 
+		//处理与任务相关的路由
 		taskGroup := listGroup.Group("/:listID/tasks")
 		{
 			taskGroup.POST("/", handlers.CreateTask)
