@@ -65,7 +65,6 @@ func UpdateList(c *gin.Context) {
 
 // DeleteList 删除清单处理函数
 func DeleteList(c *gin.Context) {
-	// 修改为 :listID
 	listIDStr := c.Param("listID")
 	listID, err := strconv.Atoi(listIDStr)
 	if err != nil {
