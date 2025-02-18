@@ -39,7 +39,6 @@ func GetLists(c *gin.Context) {
 
 // UpdateList 更新清单处理函数
 func UpdateList(c *gin.Context) {
-	// 修改为 :listID
 	//获取名为 listID 的参数值
 	listIDStr := c.Param("listID")
 	listID, err := strconv.Atoi(listIDStr)
